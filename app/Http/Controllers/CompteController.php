@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Compte;
 use App\Models\Serveur;
+use App\Models\Compte;
+use App\Models\Metier;
 use App\Models\Perso;
 use Illuminate\Http\Request;
 

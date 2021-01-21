@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Serveur;
 use App\Models\Compte;
+use App\Models\Metier;
+use App\Models\Perso;
 use Illuminate\Http\Request;
 
 class ServeurController extends Controller
@@ -27,7 +29,7 @@ class ServeurController extends Controller
     public function create()
     {
         $comptes = Compte::all();
-        return view('serveurs.form', ['serveurs'=>$comptes]);
+        return view('serveurs.form', ['comptes'=>$comptes]);
     }
 
     /**

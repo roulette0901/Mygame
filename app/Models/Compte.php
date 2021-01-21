@@ -13,7 +13,7 @@ class Compte extends Model
         'name',
     ];
  
-    public function zone () {
+    public function Serveur () {
         return $this->belongsTo(Serveur::class);
     }
  

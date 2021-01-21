@@ -1,28 +1,23 @@
 @extends('layouts.default')
 
 @section('title')
-    Comptes - Ajouter
+    metiers - Ajouter
 @endsection
 
 @section('wrapper')
-    <form action="/comptes" method="post">
+    <form action="/metiers" method="post">
         @csrf
         <p>
             <input type="text" name="name">
         </p>
         
-        <p>
-            <select name="serveur" id="serveur">
-                @foreach($serveurs as $serveur)
-                    <option value="{{ $serveur->id }}"> {{ $serveur->name }} </option>
-                @endforeach
-            </select>
-        </p>
+        </p> 
+            
         <p>
             <input type="submit">
         </p>
         <p>
-            <button><a href="/comptes">Annuler</a></button>
+            <button><a href="/metiers">Annuler</a></button>
         </p>
     </form>
 @endsection

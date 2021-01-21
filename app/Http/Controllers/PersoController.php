@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Serveur;
+use App\Models\Compte;
+use App\Models\Metier;
 use App\Models\Perso;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,8 @@ class PersoController extends Controller
      */
     public function index()
     {
-        //
+        $persos = Perso::all();
+        return view('persos.list', ['persos'=> $persos]);
     }
 
     /**
@@ -24,7 +29,9 @@ class PersoController extends Controller
      */
     public function create()
     {
-        //
+        $metiers = Metier::all();
+        //$races = Race::all();
+        return view('persos.form', ['metiers'=>$metiers]);
     }
 
     /**
@@ -35,7 +42,21 @@ class PersoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $perso = new Perso();
+        $perso->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom';
+        
+        //$race = Race::find($request->race);
+        //if ($race) {
+        //    $perso->race()->associate($race);
+        //}
+        
+        $metier = Metier::find($request->metier);
+        if($metier) {
+            $perso-> metier()->associate($metier);
+        }
+        
+        $perso->save();
+        return redirect('/perso$persos');
     }
 
     /**
@@ -46,7 +67,7 @@ class PersoController extends Controller
      */
     public function show(Perso $perso)
     {
-        //
+        return view('persos.one', ['perso'=>$perso]);
     }
 
     /**
@@ -57,7 +78,9 @@ class PersoController extends Controller
      */
     public function edit(Perso $perso)
     {
-        //
+        $metiers = Metier::all();
+       // $races = Race::all();
+        return view('persos.edit', ['perso'=>$perso, 'metiers'=>$metier]);
     }
 
     /**
@@ -69,7 +92,14 @@ class PersoController extends Controller
      */
     public function update(Request $request, Perso $perso)
     {
-        //
+        $perso->name = $request->has('name') && strlen($request->name) ? $request->name : $perso->name;
+        //$race = Race::find($request->race);
+        $perso->race()->associate($race);
+        $metier = Metier::find($request->metier);
+        $perso->metier()->associate($metier);
+        $perso->save();
+        
+        return redirect('/persos');
     }
 
     /**
@@ -80,6 +110,7 @@ class PersoController extends Controller
      */
     public function destroy(Perso $perso)
     {
-        //
+        $perso->delete();
+        return redirect('/persos');
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serveur;
+use App\Models\Compte;
 use App\Models\Metier;
+use App\Models\Perso;
 use Illuminate\Http\Request;
 
 class MetierController extends Controller
@@ -14,7 +17,8 @@ class MetierController extends Controller
      */
     public function index()
     {
-        //
+        $metiers = Metier::all();
+        return view('metiers.list', ['metiers'=> $metiers]);
     }
 
     /**
@@ -24,7 +28,8 @@ class MetierController extends Controller
      */
     public function create()
     {
-        //
+        $persos = Perso::all();
+        return view('metiers.form', ['persos'=>$persos]);
     }
 
     /**
@@ -35,7 +40,18 @@ class MetierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $metier = new Metier();
+        $metier->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom';
+        
+        $metier->save();
+        
+        if($request->comptes) {
+           $comptes = Compte::find($request->comptes);
+           $metier->comptes()->saveMany($comptes);
+        }
+        $metier->save();
+        
+        return redirect('/metiers');
     }
 
     /**
@@ -46,7 +62,7 @@ class MetierController extends Controller
      */
     public function show(Metier $metier)
     {
-        //
+        return view('metiers.one', ['metier'=>$metier]);
     }
 
     /**
@@ -57,7 +73,8 @@ class MetierController extends Controller
      */
     public function edit(Metier $metier)
     {
-        //
+        $comptes = Compte::all();
+        return view('metiers.edit', ['metier'=>$metier, 'comptes'=>$comptes]);
     }
 
     /**
@@ -69,7 +86,16 @@ class MetierController extends Controller
      */
     public function update(Request $request, Metier $metier)
     {
-        //
+        $metier->name = $request->has('name') && strlen($request->name) ? $request->name : $metier->name;
+        
+        if($request->persos) {
+            $persos = Perso::find($request->persos);
+            $metier->persos()->saveMany($persos);
+        }
+        
+        $metier->save();
+        
+        return redirect('/metiers');
     }
 
     /**
@@ -80,6 +106,7 @@ class MetierController extends Controller
      */
     public function destroy(Metier $metier)
     {
-        //
+        $metier->delete();
+        return redirect('/metiers');
     }
 }

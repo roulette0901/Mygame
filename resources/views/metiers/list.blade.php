@@ -1,13 +1,13 @@
 @extends('layouts.default')
 
 @section('title')
-    Animals
+    metiers
 @endsection
 
 @section('wrapper')
-    <h1>Liste des Comptes</h1>
-    <h2><a href="/comptes/create">Ajouter un compte</a></h2>
+    <h1>Liste des metiers</h1>
+    <h2><a href="/metiers/create">Ajouter une metier</a></h2>
     <ul>
-        @each('comptes.one', $comptes, 'compte')
+        @each('metiers.one', $metiers, 'metier')
     </ul>
 @endsection
