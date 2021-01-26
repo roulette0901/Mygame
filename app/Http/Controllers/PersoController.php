@@ -30,7 +30,6 @@ class PersoController extends Controller
     public function create()
     {
         $metiers = Metier::all();
-        //$races = Race::all();
         return view('persos.form', ['metiers'=>$metiers]);
     }
 
@@ -44,11 +43,7 @@ class PersoController extends Controller
     {
         $perso = new Perso();
         $perso->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom';
-        
-        //$race = Race::find($request->race);
-        //if ($race) {
-        //    $perso->race()->associate($race);
-        //}
+
         
         $metier = Metier::find($request->metier);
         if($metier) {
@@ -56,7 +51,7 @@ class PersoController extends Controller
         }
         
         $perso->save();
-        return redirect('/perso$persos');
+        return redirect('/persos');
     }
 
     /**
@@ -79,8 +74,7 @@ class PersoController extends Controller
     public function edit(Perso $perso)
     {
         $metiers = Metier::all();
-       // $races = Race::all();
-        return view('persos.edit', ['perso'=>$perso, 'metiers'=>$metier]);
+        return view('persos.edit', ['perso'=>$perso, 'metier'=>$metier]);
     }
 
     /**
@@ -94,7 +88,6 @@ class PersoController extends Controller
     {
         $perso->name = $request->has('name') && strlen($request->name) ? $request->name : $perso->name;
         //$race = Race::find($request->race);
-        $perso->race()->associate($race);
         $metier = Metier::find($request->metier);
         $perso->metier()->associate($metier);
         $perso->save();

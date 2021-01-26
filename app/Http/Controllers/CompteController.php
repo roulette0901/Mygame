@@ -41,7 +41,12 @@ class CompteController extends Controller
     public function store(Request $request)
     {
         $compte = new Compte();
-        $compte->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom';        
+        $compte->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom'; 
+        
+        $serveur = Serveur::find($request->serveur);
+        if($serveur) {
+            $compte-> serveur()->associate($serveur);
+        }
         $compte->save();
         return redirect('/comptes');
     }

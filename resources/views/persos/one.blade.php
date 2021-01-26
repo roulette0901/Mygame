@@ -1,5 +1,5 @@
 <h1>{{ $perso->name }}</h1>
-<p>{{ $perso->race->name }}</p>
+<p>{{ $perso->metier->name }}</p>
 {{--<p>{{ $perso->zone->name }}</p>--}}
 {{--<p>{{ $perso->zone->id }}</p>--}}
 <form action="/persos/{{ $perso->id }}" method="post">
