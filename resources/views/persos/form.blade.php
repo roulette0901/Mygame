@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-    persos - Ajouter
+    Persos - Ajouter
 @endsection
 
 @section('wrapper')
@@ -15,6 +15,13 @@
             <select name="metier" id="metier">
                 @foreach($metiers as $metier)
                     <option value="{{ $metier->id }}"> {{ $metier->name }} </option>
+                @endforeach
+            </select>
+        </p>
+        <p>
+            <select name="compte" id="compte" multiple>
+                @foreach($comptes as $compte)
+                    <option value="{{ $compte->id }}">{{ $compte->name }}</option>
                 @endforeach
             </select>
         </p>

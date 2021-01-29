@@ -13,11 +13,13 @@ class Compte extends Model
         'name',
     ];
  
-    public function Serveur () {
+    public function serveur () {
         return $this->belongsTo(Serveur::class);
     }
  
-    //public function race () {
-      //  return $this->belongsTo(Race::class);
-  //  }
+    public function perso () {
+        
+        return $this->belongsToMany(Perso::class);
+}
+
 }

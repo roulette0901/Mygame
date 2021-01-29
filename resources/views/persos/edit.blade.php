@@ -12,6 +12,11 @@
            @endif
         @endforeach
     </select>
+    <select name="compte" id="compte" multiple>
+        @foreach($comptes as $compte)
+           <option value="{{ $compte->id }}">{{ $compte->name }}</option> 
+        @endforeach
+    </select>
     <input type="submit">
     <button><a href="/persos">Annuler</a></button>
 </form>

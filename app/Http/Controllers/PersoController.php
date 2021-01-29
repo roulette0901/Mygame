@@ -28,9 +28,10 @@ class PersoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $comptes = Compte::all();
         $metiers = Metier::all();
-        return view('persos.form', ['metiers'=>$metiers]);
+        return view('persos.form', ['metiers'=>$metiers ,'comptes'=>$comptes]);
     }
 
     /**
@@ -42,13 +43,21 @@ class PersoController extends Controller
     public function store(Request $request)
     {
         $perso = new Perso();
+
         $perso->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom';
 
-        
+    
         $metier = Metier::find($request->metier);
+
         if($metier) {
             $perso-> metier()->associate($metier);
         }
+        $perso->save();
+
+        if($request->comptes) { 
+            $compts = Compte::find($request->comptes);
+            $perso->comptes()->saveMany($comptes);
+         }
         
         $perso->save();
         return redirect('/persos');
@@ -74,7 +83,8 @@ class PersoController extends Controller
     public function edit(Perso $perso)
     {
         $metiers = Metier::all();
-        return view('persos.edit', ['perso'=>$perso, 'metier'=>$metier]);
+        $comptes = Compte::all();
+        return view('persos.edit', ['perso'=>$perso, 'metier'=>$metier, 'compte'=>$compte]);
     }
 
     /**
@@ -87,9 +97,15 @@ class PersoController extends Controller
     public function update(Request $request, Perso $perso)
     {
         $perso->name = $request->has('name') && strlen($request->name) ? $request->name : $perso->name;
-        //$race = Race::find($request->race);
+
         $metier = Metier::find($request->metier);
         $perso->metier()->associate($metier);
+
+        if($request->comptes) {
+            $comptes = Compte::find($request->comptes);
+            $perso->compte()->sync($comptes);
+        }
+         
         $perso->save();
         
         return redirect('/persos');

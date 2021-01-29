@@ -29,7 +29,8 @@ class CompteController extends Controller
     public function create()
     {
         $serveurs = Serveur::all();
-        return view('comptes.form', ['serveurs'=>$serveurs]);
+        $persos = Perso::all();
+        return view('comptes.form', ['serveurs'=>$serveurs, 'persos'=>$persos]);
     }
 
     /**
@@ -43,11 +44,22 @@ class CompteController extends Controller
         $compte = new Compte();
         $compte->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom'; 
         
+        
+
         $serveur = Serveur::find($request->serveur);
+        
         if($serveur) {
             $compte-> serveur()->associate($serveur);
         }
         $compte->save();
+
+        if($request->Persos) {
+            $Peros = Perso::find($request->Persos);
+            $Compte->Perso()->saveMany($Persos);
+            
+        }
+        $Perso->save();
+
         return redirect('/comptes');
     }
 
@@ -71,7 +83,8 @@ class CompteController extends Controller
     public function edit(Compte $compte)
     {
         $serveurs = Serveur::all();
-        return view('comptes.edit', ['compte'=>$compte, 'serveur'=>$serveur]);
+        $Persos = Perso::all();
+        return view('comptes.edit', ['compte'=>$compte, 'serveur'=>$serveur, 'persos' => $Persos]);
     }
 
     /**
@@ -84,8 +97,14 @@ class CompteController extends Controller
     public function update(Request $request, Compte $compte)
     {
         $compte->name = $request->has('name') && strlen($request->name) ? $request->name : $compte->name;
+
         $serveur = Serveur::find($request->serveur);
         $compte->serveur()->associate($serveur);
+
+        if($request->Persos) {
+            $Persos = Perso::find($request->Persos);
+            $Compte->Perso()->sync($Persos);
+            }
         $compte->save();
         
         return redirect('/comptes');

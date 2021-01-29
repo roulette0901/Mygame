@@ -1,7 +1,8 @@
 <h1>{{ $perso->name }}</h1>
-<p>{{ $perso->metier->name }}</p>
-{{--<p>{{ $perso->zone->name }}</p>--}}
-{{--<p>{{ $perso->zone->id }}</p>--}}
+@foreach($Perso->compte as $compte) 
+    <h5>{{ $compte->name }} </h5>
+@endforeach
+
 <form action="/persos/{{ $perso->id }}" method="post">
     @csrf
     @method('delete')

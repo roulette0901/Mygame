@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-    persos
+    Persos
 @endsection
 
 @section('wrapper')

@@ -13,7 +13,7 @@ class Serveur extends Model
         'name'
     ];
 
-    public function comptes () {
+    public function compte () {
         return $this->hasMany(Compte::class);
     }
 

@@ -28,8 +28,8 @@ class ServeurController extends Controller
      */
     public function create()
     {
-        $comptes = Compte::all();
-        return view('serveurs.form', ['comptes'=>$comptes]);
+        
+        return view('serveurs.form');
     }
 
     /**
@@ -45,11 +45,6 @@ class ServeurController extends Controller
         
         $serveur->save();
         
-        if($request->comptes) {
-           $comptes = compte::find($request->comptes);
-           $serveur->comptes()->saveMany($comptes);
-        }
-        $serveur->save();
         
         return redirect('/serveurs');
     }
@@ -73,8 +68,8 @@ class ServeurController extends Controller
      */
     public function edit(Serveur $serveur)
     {
-        $comptes = Compte::all();
-        return view('serveurs.edit', ['serveur'=>$serveur, 'comptes'=>$comptes]);
+        
+        return view('serveurs.edit', ['serveur'=>$serveur]);
     }
 
     /**
@@ -87,11 +82,6 @@ class ServeurController extends Controller
     public function update(Request $request, Serveur $serveur)
     {
         $serveur->name = $request->has('name') && strlen($request->name) ? $request->name : $serveur->name;
-        
-        if($request->comptes) {
-            $comptes = compte::find($request->comptes);
-            $serveur->comptes()->saveMany($comptes);
-        }
         
         $serveur->save();
         

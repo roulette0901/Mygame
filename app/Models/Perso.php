@@ -16,5 +16,8 @@ class Perso extends Model
     public function metier () {
         return $this->belongsTo(Metier::class);
     }
- 
+    
+    public function compte () {
+        return $this->belongsToMany(Compte::class);
+    }
 }

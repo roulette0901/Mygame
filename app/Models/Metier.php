@@ -13,7 +13,7 @@ class Metier extends Model
         'name'
     ];
 
-    public function persos () {
-        return $this->hasMany(Persos::class);
+    public function perso () {
+        return $this->hasMany(Perso::class);
     }
 }
