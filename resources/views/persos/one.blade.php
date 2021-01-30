@@ -1,5 +1,5 @@
 <h1>{{ $perso->name }}</h1>
-@foreach($Perso->compte as $compte) 
+@foreach($perso->compte as $compte) 
     <h5>{{ $compte->name }} </h5>
 @endforeach
 

@@ -54,11 +54,11 @@ class CompteController extends Controller
         $compte->save();
 
         if($request->Persos) {
-            $Peros = Perso::find($request->Persos);
+            $Persos = Perso::find($request->Persos);
             $Compte->Perso()->saveMany($Persos);
             
         }
-        $Perso->save();
+        $compte->save();
 
         return redirect('/comptes');
     }

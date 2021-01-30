@@ -20,8 +20,8 @@
         </p>
         <p>
             <select name="Perso[]" id="Persos" multiple>
-                @foreach($Persos as $Perso)
-                    <option value="{{ $Perso->id }}"> {{ $Perso->Nom }} </option>
+                @foreach($persos as $Perso)
+                    <option value="{{ $Perso->id }}"> {{ $Perso->name }} </option>
                 @endforeach
             </select>
         </p>
