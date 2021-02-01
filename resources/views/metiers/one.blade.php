@@ -1,5 +1,5 @@
 <h1>{{$metier->name}}</h1>
-<p>{{$metier->perso->name}}</p>
+
 
 @if (Auth::user())
 <form action="/metiers/{{ $metier->id }}" method="post">
