@@ -46,16 +46,16 @@ class CompteController extends Controller
         
         
 
-        $serveur = Serveur::find($request->serveur);
+        $serveurs = Serveur::find($request->serveurs);
         
-        if($serveur) {
-            $compte-> serveur()->associate($serveur);
+        if($serveurs) {
+            $compte-> serveur()->associate($serveurs);
         }
         $compte->save();
 
         if($request->Persos) {
-            $Persos = Perso::find($request->Persos);
-            $Compte->Perso()->saveMany($Persos);
+            $perso = Perso::find($request->perso);
+            $Compte->Perso()->saveMany($perso);
             
         }
         $compte->save();
@@ -82,9 +82,10 @@ class CompteController extends Controller
      */
     public function edit(Compte $compte)
     {
-        $serveurs = Serveur::all();
-        $Persos = Perso::all();
-        return view('comptes.edit', ['compte'=>$compte, 'serveur'=>$serveur, 'persos' => $Persos]);
+        
+        $serveur = Serveur::all();
+        $perso = Perso::all();
+        return view('comptes.edit', ['compte'=>$compte, 'serveur'=>$serveur, 'perso' => $perso]);
     }
 
     /**

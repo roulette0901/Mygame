@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersosTable extends Migration
+class CreatePerso extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,11 @@ class CreatePersosTable extends Migration
     {
         Schema::create('persos', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
+            $table->unsignedBigInteger('metier_id');
+            $table->foreign('metier_id')->references('id')->on('metiers');
+            
         });
     }
 

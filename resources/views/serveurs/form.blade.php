@@ -10,8 +10,6 @@
         <p>
             <input type="text" name="name">
         </p>
-        
-        </p> 
             
         <p>
             <input type="submit">

@@ -82,9 +82,9 @@ class PersoController extends Controller
      */
     public function edit(Perso $perso)
     {
-        $metiers = Metier::all();
+        $metier = Metier::all();
         $comptes = Compte::all();
-        return view('persos.edit', ['perso'=>$perso, 'metier'=>$metier, 'compte'=>$compte]);
+        return view('persos.edit', ['perso'=>$perso, 'metier'=>$metier, 'compte'=>$comptes]);
     }
 
     /**

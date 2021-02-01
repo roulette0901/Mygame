@@ -1,10 +1,12 @@
 <h1>{{ $perso->name }}</h1>
-@foreach($perso->compte as $compte) 
-    <h5>{{ $compte->name }} </h5>
-@endforeach
+<p>{{$perso->metier->name}}</p>
 
+@if (Auth::user())
 <form action="/persos/{{ $perso->id }}" method="post">
     @csrf
     @method('delete')
     <input type="submit" value="Delete">
+    <a  role="button" href="/persos/{{ $perso->id }}/edit">Modifier</a>
+    
 </form>
+@endif

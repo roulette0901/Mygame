@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateM extends Migration
+class CreateServeur extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class UpdateM extends Migration
      */
     public function up()
     {
-        Schema::table('persos', function (Blueprint $table) {
-            $table->unsignedBigInteger('metiers_id');
-            $table->foreign('metiers_id')->references('id')->on('metiers');
+        Schema::create('serveurs', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+
+
         });
     }
 
@@ -26,6 +29,6 @@ class UpdateM extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('serveurs');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateMaTableMetier extends Migration
+class CreateCompte extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class UpdateMaTableMetier extends Migration
      */
     public function up()
     {
-        Schema::table('metiers', function (Blueprint $table) {
-            $table->string('name');  
+        Schema::create('comptes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+            $table->unsignedBigInteger('serveur_id');
+            $table->foreign('serveur_id')->references('id')->on('serveurs');
+
         });
     }
 
@@ -25,6 +30,6 @@ class UpdateMaTableMetier extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('comptes');
     }
 }

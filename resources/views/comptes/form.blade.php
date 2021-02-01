@@ -12,14 +12,14 @@
         </p>
         
         <p>
-            <select name="serveur" id="serveur">
+            <select name="serveurs" id="serveurs">
                 @foreach($serveurs as $serveur)
                     <option value="{{ $serveur->id }}"> {{ $serveur->name }} </option>
                 @endforeach
             </select>
         </p>
         <p>
-            <select name="Perso[]" id="Persos" multiple>
+            <select name="persos[]" id="persos" multiple>
                 @foreach($persos as $Perso)
                     <option value="{{ $Perso->id }}"> {{ $Perso->name }} </option>
                 @endforeach
