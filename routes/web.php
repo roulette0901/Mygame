@@ -29,6 +29,8 @@ require __DIR__.'/auth.php';
 
 Route::resource('comptes', CompteController::class);
 
+Route::resource('actions', ActionController::class);
+
 Route::resource('serveurs', ServeurController::class);
 
 Route::resource('persos', PersoController::class);

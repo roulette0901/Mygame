@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Action;
 use App\Models\Serveur;
 use App\Models\Compte;
 use App\Models\Metier;
@@ -60,6 +60,13 @@ class PersoController extends Controller
          }
         
         $perso->save();
+
+        $action = new Action();
+        $action->model = 'perso';
+        $action->action = 'create';
+
+        $action->save(); 
+
         return redirect('/persos');
     }
 
@@ -107,6 +114,12 @@ class PersoController extends Controller
         }
          
         $perso->save();
+
+        $action = new Action();
+        $action->model = 'perso';
+        $action->action = 'update';
+
+        $action->save();
         
         return redirect('/persos');
     }
@@ -120,6 +133,13 @@ class PersoController extends Controller
     public function destroy(Perso $perso)
     {
         $perso->delete();
+
+        $action = new Action();
+        $action->model = 'perso';
+        $action->action = 'delete';
+
+        $action->save();
+
         return redirect('/persos');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Serveur;
 use App\Models\Compte;
 use App\Models\Metier;
@@ -60,6 +61,13 @@ class CompteController extends Controller
         }
         $compte->save();
 
+        
+        $action = new Action();
+        $action->model = 'compte';
+        $action->action = 'create';
+
+        $action->save();
+
         return redirect('/comptes');
     }
 
@@ -107,6 +115,13 @@ class CompteController extends Controller
             $Compte->Perso()->sync($Persos);
             }
         $compte->save();
+
+        
+        $action = new Action();
+        $action->model = 'compte';
+        $action->action = 'update';
+
+        $action->save();
         
         return redirect('/comptes');
     }
@@ -120,6 +135,14 @@ class CompteController extends Controller
     public function destroy(Compte $compte)
     {
         $compte->delete();
+
+        
+        $action = new Action();
+        $action->model = 'compte';
+        $action->action = 'delete';
+
+        $action->save();
+
         return redirect('/comptes');
     }
 }

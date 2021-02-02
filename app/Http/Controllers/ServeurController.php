@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Serveur;
 use App\Models\Compte;
 use App\Models\Metier;
@@ -44,6 +45,13 @@ class ServeurController extends Controller
         $serveur->name = $request->has('name') && strlen($request->name) ? $request->name : 'Pas de nom';
         
         $serveur->save();
+
+
+        $action = new Action();
+        $action->model = 'serveur';
+        $action->action = 'create';
+
+        $action->save();
         
         
         return redirect('/serveurs');
@@ -84,6 +92,14 @@ class ServeurController extends Controller
         $serveur->name = $request->has('name') && strlen($request->name) ? $request->name : $serveur->name;
         
         $serveur->save();
+
+        $action = new Action();
+        $action->model = 'serveur';
+        $action->action = 'update';
+
+        $action->save();
+
+
         
         return redirect('/serveurs');
     }
@@ -97,6 +113,13 @@ class ServeurController extends Controller
     public function destroy(Serveur $serveur)
     {
         $serveur->delete();
+
+        $action = new Action();
+        $action->model = 'serveur';
+        $action->action = 'detele';
+
+        $action->save();
+
         return redirect('/serveurs');
     }
 }

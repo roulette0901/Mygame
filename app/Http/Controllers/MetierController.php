@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Serveur;
 use App\Models\Compte;
 use App\Models\Metier;
@@ -50,6 +51,13 @@ class MetierController extends Controller
            $metier->comptes()->saveMany($comptes);
         }
         $metier->save();
+
+        
+        $action = new Action();
+        $action->model = 'metier';
+        $action->action = 'create';
+
+        $action->save();
         
         return redirect('/metiers');
     }
@@ -94,6 +102,13 @@ class MetierController extends Controller
         }
         
         $metier->save();
+
+        
+        $action = new Action();
+        $action->model = 'metier';
+        $action->action = 'update';
+
+        $action->save();
         
         return redirect('/metiers');
     }
@@ -107,6 +122,13 @@ class MetierController extends Controller
     public function destroy(Metier $metier)
     {
         $metier->delete();
+
+        
+        $action = new Action();
+        $action->model = 'metier';
+        $action->action = 'delete';
+
+        $action->save();
         return redirect('/metiers');
     }
 }

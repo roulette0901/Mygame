@@ -11,11 +11,13 @@
         <h1>My Game</h1>
         <nav>
             <ul><li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/actions">Action</a></li>
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/comptes">Comptes</a></li>
                 <li><a href="/serveurs">Serveurs</a></li>
                 <li><a href="/persos">Persos</a></li>
                 <li><a href="/metiers">metier</a></li>
+                
             </ul>
         </nav>
     </header>
